@@ -1,0 +1,14 @@
+---
+root: true
+plugins:
+  - github
+extends:
+  - plugin:@microsoft/sdl/common
+  - plugin:github/recommended
+  - plugin:github/typescript
+  - plugin:prettier/recommended
+rules:
+  eslint-comments/no-unlimited-disable: off
+  eslint-comments/no-use: off
+  i18n-text/no-en: off
+  no-console: off

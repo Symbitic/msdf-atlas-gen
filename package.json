@@ -1,0 +1,78 @@
+{
+  "name": "msdf-atlas-gen",
+  "version": "0.0.0",
+  "description": "Wrapper for msdf-atlas-gen",
+  "author": "Alex Shaw",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "dist",
+  "sideEffects": false,
+  "bin": {
+    "msdf-atlas-gen": "./dist/msdf-atlas-gen.js"
+  },
+  "files": [
+    "README.md",
+    "dist",
+    "bin",
+    "package.json"
+  ],
+  "keywords": [
+    "babylonjs",
+    "fonts",
+    "msdf",
+    "sdf"
+  ],
+  "scripts": {
+    "clean": "npx rimraf dist build",
+    "build:cpp": "cmake --build build --config Release",
+    "build:ts": "tsc",
+    "build": "npm run build:cpp && npm run build:ts",
+    "fmt": "prettier --write ./src",
+    "lint": "eslint --cache ./src",
+    "lint:fix": "eslint --cache --fix ./src",
+    "prebuild:cpp": "cmake -S msdf-atlas-gen -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=$PWD/vcpkg/scripts/buildsystems/vcpkg.cmake",
+    "prepublishOnly": "npm run build",
+    "watch": "tsc --watch"
+  },
+  "engines": {
+    "node": ">= 20"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npx commitlint --edit $1",
+    "pre-commit": "npx lint-staged"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "execa": "^8.0.1",
+    "google-font-metadata": "^5.2.1",
+    "opentype.js": "^1.3.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
+    "@microsoft/eslint-plugin-sdl": "^0.2.0",
+    "@types/node": "^20.1.2",
+    "@types/opentype.js": "^1.3.8",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-github": "^4.10.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "lint-staged": "^15.2.1",
+    "prettier": "^3.0.1",
+    "rimraf": "^5.0.0",
+    "simple-git-hooks": "^2.9.0",
+    "typescript": "^5.0.4"
+  }
+}
