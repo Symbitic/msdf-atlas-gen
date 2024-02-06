@@ -31,6 +31,14 @@ jobs:
         if: contains(matrix.os, 'windows')
         uses: microsoft/setup-msbuild@v2
 
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v1.14.2
+        with:
+          cmake-version: '3.21.x'
+
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
