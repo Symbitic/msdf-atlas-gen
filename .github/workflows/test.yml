@@ -34,7 +34,7 @@ jobs:
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v1.14.2
         with:
-          cmake-version: '3.21.x'
+          cmake-version: "3.21.x"
 
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@v4
@@ -58,7 +58,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: bin/${{ matrix.os }}
+          name: bin-${{ matrix.os }}
           path: bin/*
           retention-days: 1
 
