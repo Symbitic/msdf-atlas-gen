@@ -26,13 +26,10 @@
   ],
   "scripts": {
     "clean": "npx rimraf dist build",
-    "build:cpp": "cmake --build build --config Release",
-    "build:ts": "tsc",
-    "build": "npm run build:cpp && npm run build:ts",
+    "build": "tsc",
     "fmt": "prettier --write ./src",
     "lint": "eslint --cache ./src",
     "lint:fix": "eslint --cache --fix ./src",
-    "prebuild:cpp": "cross-env cmake -S msdf-atlas-gen -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=$PWD/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "prepublishOnly": "npm run build",
     "watch": "tsc --watch"
   },
