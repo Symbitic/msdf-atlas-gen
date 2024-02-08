@@ -26,10 +26,13 @@
   ],
   "scripts": {
     "clean": "npx rimraf dist build",
-    "build": "tsc",
+    "build:cpp": "cmake --build build --config Release --parallel 4 --target msdf-atlas-gen-standalone",
+    "build:ts": "tsc",
+    "build": "npm run build:cpp && npm run build:ts",
     "fmt": "prettier --write ./src",
     "lint": "eslint --cache ./src",
     "lint:fix": "eslint --cache --fix ./src",
+    "prebuild:cpp": "cmake -S . -B build",
     "prepublishOnly": "npm run build",
     "watch": "tsc --watch"
   },

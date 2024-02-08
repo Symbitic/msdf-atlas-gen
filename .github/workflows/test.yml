@@ -34,7 +34,7 @@ jobs:
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v1.14.2
         with:
-          cmake-version: "3.21.x"
+          cmake-version: "3.23.x"
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -46,30 +46,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
 
-      - name: Bootstrap vcpkg (Windows)
-        if: contains(matrix.os, 'windows')
-        run: .\vcpkg\bootstrap-vcpkg.bat
-
-      - name: Bootstrap vcpkg (UNIX)
-        if: ${{ ! contains(matrix.os, 'windows') }}
-        run: ./vcpkg/bootstrap-vcpkg.sh
-
-      - name: Configure CMake (ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        run: cmake -B build -S msdf-atlas-gen -G Ninja -DCMAKE_TOOLCHAIN_FILE=$PWD/vcpkg/scripts/buildsystems/vcpkg.cmake
-
-      - name: Configure CMake (macos)
-        if: contains(matrix.os, 'macos')
-        run: cmake -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=10.15 -DCMAKE_BUILD_TYPE=Release -B build -S msdf-atlas-gen -DCMAKE_TOOLCHAIN_FILE=$PWD/vcpkg/scripts/buildsystems/vcpkg.cmake
-
-      - name: Configure CMake (windows)
-        if: contains(matrix.os, 'windows')
-        run: cmake -A x64 -DCMAKE_SYSTEM_VERSION=10.0.22000.0 -B build -S msdf-atlas-gen -DCMAKE_TOOLCHAIN_FILE=$PWD/vcpkg/scripts/buildsystems/vcpkg.cmake
-
       - name: Build
-        run: cmake --build build --config Release --parallel 4
-
-      - name: Build (TypeScript)
         run: npm run build
 
       - name: Rename
