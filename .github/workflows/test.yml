@@ -48,7 +48,7 @@ jobs:
 
       - name: Configure CMake (ubuntu)
         if: contains(matrix.os, 'ubuntu')
-        run: cmake -DCMAKE_BUILD_TYPE=Release -B build -S msdf-atlas-gen -DCMAKE_TOOLCHAIN_FILE=$PWD/vcpkg/scripts/buildsystems/vcpkg.cmake
+        run: cmake -B build -S msdf-atlas-gen -G Ninja -DCMAKE_TOOLCHAIN_FILE=$PWD/vcpkg/scripts/buildsystems/vcpkg.cmake
 
       - name: Configure CMake (macos)
         if: contains(matrix.os, 'macos')
