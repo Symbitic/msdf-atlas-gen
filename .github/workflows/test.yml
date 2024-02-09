@@ -47,7 +47,10 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: List vcpkg directory
-        run: ls $GITHUB_WORKSPACE/vcpkg/scripts/buildsystems
+        run: ls $GITHUB_WORKSPACE
+
+      - name: List 2
+        run: ls $PWD
 
       - name: Build
         run: npx cross-env VCPKG_ROOT=$GITHUB_WORKSPACE/vcpkg cmake -S msdf-atlas-gen -B build -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=build/bin
