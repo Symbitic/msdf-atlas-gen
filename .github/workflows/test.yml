@@ -18,8 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-latest
-          - macos-latest
           - windows-latest
     steps:
       - name: Clone Repository
@@ -49,7 +47,7 @@ jobs:
       - name: Configure
         env:
           VCPKG_ROOT: ${{ github.workspace }}/vcpkg
-        run: cmake -S msdf-atlas-gen -B build -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=build/bin
+        run: cmake -S msdf-atlas-gen -B build -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=build/bin -DMSDF_ATLAS_USE_SKIA=OFF
 
       - name: Build
         run: cmake --build build --config Release --parallel 4 --target msdf-atlas-gen-standalone
