@@ -29,6 +29,7 @@ jobs:
 
       - name: Set artifact path
         id: set-path
+        shell: bash
         run: |
           if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
             echo "::set-output name=artifact_path::./bin/linux/msdf-atlas-gen"
