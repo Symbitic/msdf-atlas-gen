@@ -125,7 +125,12 @@ function genChars(fontSpec: Record<string, any>) {
 
 export function getPathToExe() {
   const binName = `msdf-atlas-gen${process.platform === "win32" ? ".exe" : ""}`;
-  const buildPath = resolve("build", "bin", binName);
+  const buildPath = resolve(
+    "build",
+    "bin",
+    process.platform === "win32" ? "Release" : "",
+    binName,
+  );
   const binPath = resolve("bin", process.platform, binName);
 
   if (existsSync(buildPath)) {
