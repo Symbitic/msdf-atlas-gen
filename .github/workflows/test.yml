@@ -54,14 +54,17 @@ jobs:
       - name: Build
         run: cmake --build build --config Release --parallel 4 --target msdf-atlas-gen-standalone
 
+      - name: Rename
+        run: node rename.js
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: bins
           path: |
-            bin/win32/msdf-atlas-gen.exe
-            bin/darwin/msdf-atlas-gen
-            bin/linux/msdf-atlas-gen
+            bin/win32/*
+            bin/darwin/*
+            bin/linux/*
           if-no-files-found: error
           retention-days: 1
 
