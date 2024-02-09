@@ -30,11 +30,11 @@ jobs:
       - name: Set artifact path
         id: set-path
         run: |
-          if [ "${{ runner.os }}" = "Linux" ]; then
+          if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
             echo "::set-output name=artifact_path::./bin/linux/msdf-atlas-gen"
-          elif [ "${{ runner.os }}" = "macOS" ]; then
+          elif [ "${{ matrix.os }}" == "macos-latest" ]; then
             echo "::set-output name=artifact_path::./bin/darwin/msdf-atlas-gen"
-          elif [ "${{ runner.os }}" = "Windows" ]; then
+          elif [ "${{ matrix.os }}" == "windows-latest" ]; then
             echo "::set-output name=artifact_path::./bin/win32/msdf-atlas-gen.exe"
           fi
 
