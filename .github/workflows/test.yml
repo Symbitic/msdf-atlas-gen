@@ -18,6 +18,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
+          - ubuntu-latest
+          - macos-latest
           - windows-latest
     steps:
       - name: Clone Repository
@@ -58,7 +60,6 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: bin-${{ matrix.os }}
           path: bin/*
           retention-days: 1
 
