@@ -72,8 +72,6 @@ jobs:
     steps:
       - name: Clone Repository
         uses: actions/checkout@v2
-        with:
-          submodules: recursive
 
       - name: Download artifacts
         uses: actions/download-artifact@v4

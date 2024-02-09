@@ -5,7 +5,12 @@ import { join } from "node:path";
 const binName = `msdf-atlas-gen${process.platform === "win32" ? ".exe" : ""}`;
 const osPath = join("bin", process.platform);
 const binPath = join("bin", process.platform, binName);
-const buildPath = join("build", "bin", binName);
+const buildPath = join(
+  "build",
+  "bin",
+  process.platform === "win32" ? "Release" : "",
+  binName,
+);
 
 if (existsSync(binPath)) {
   process.exit(0);
