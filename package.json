@@ -1,6 +1,6 @@
 {
   "name": "msdf-atlas-gen",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Wrapper for msdf-atlas-gen",
   "author": "Alex Shaw",
   "license": "MIT",
