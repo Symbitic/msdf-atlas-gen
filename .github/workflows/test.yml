@@ -32,11 +32,11 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-            echo "::set-output name=artifact_path::./bin/linux/msdf-atlas-gen"
+            echo "ARTIFACT_PATH=./bin/linux/msdf-atlas-gen" >> $GITHUB_OUTPUT
           elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-            echo "::set-output name=artifact_path::./bin/darwin/msdf-atlas-gen"
+            echo "ARTIFACT_PATH=./bin/darwin/msdf-atlas-gen" >> $GITHUB_OUTPUT
           elif [ "${{ matrix.os }}" == "windows-latest" ]; then
-            echo "::set-output name=artifact_path::./bin/win32/msdf-atlas-gen.exe"
+            echo "ARTIFACT_PATH=./bin/win32/msdf-atlas-gen.exe" >> $GITHUB_OUTPUT
           fi
 
       - name: Add msbuild to PATH
@@ -73,7 +73,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: msdf-atlas-gen-${{ matrix.os }}
-          path: ${{ steps.set-path.outputs.artifact_path }}
+          path: ${{ steps.set-path.outputs.ARTIFACT_PATH }}
           if-no-files-found: error
           retention-days: 1
 
