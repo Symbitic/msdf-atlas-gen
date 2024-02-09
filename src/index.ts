@@ -131,11 +131,16 @@ export function getPathToExe() {
     process.platform === "win32" ? "Release" : "",
     binName,
   );
-  const binPath = resolve("bin", process.platform, binName);
 
   if (existsSync(buildPath)) {
     return buildPath;
-  } else if (existsSync(binPath)) {
+  }
+
+  const binPath = resolve(
+    "bin",
+    `msdf-atlas-gen-${process.platform}${process.platform === "win32" ? ".exe" : ""}`,
+  );
+  if (existsSync(binPath)) {
     return binPath;
   }
 
