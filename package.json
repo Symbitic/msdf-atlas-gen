@@ -26,13 +26,10 @@
   ],
   "scripts": {
     "clean": "npx rimraf dist build",
-    "build:cpp": "cmake --build build --config Release --parallel 4 --target msdf-atlas-gen-standalone",
-    "build:ts": "tsc",
-    "build": "npm run build:cpp && npm run build:ts",
+    "build": "tsc",
     "fmt": "prettier --write ./src",
     "lint": "eslint --cache ./src",
     "lint:fix": "eslint --cache --fix ./src",
-    "prebuild:cpp": "cross-env VCPKG_ROOT=$PWD/vcpkg cmake -S msdf-atlas-gen -B build -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=$PWD/build/bin",
     "prepublishOnly": "npm run build",
     "watch": "tsc --watch"
   },
