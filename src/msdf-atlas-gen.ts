@@ -1,12 +1,17 @@
 import { APIv2 as GoogleFonts } from "google-font-metadata";
 import { Command, Option } from "commander";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { writeFile } from "node:fs/promises";
 
 import { AtlasFormats, msdfAtlasGen } from "./index";
-import { version } from "../package.json";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const pkgPath = join(__dirname, "..", "package.json");
+const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
 
 const program = new Command();
 
@@ -44,7 +49,7 @@ async function downloadFont(name: string, weight: number = 400) {
 }
 
 program
-  .version(version)
+  .version(pkg.version)
   .description("Utility for generating compact font atlases using msdfgen")
   .argument("<font>", "ttf/otf file")
   .addOption(

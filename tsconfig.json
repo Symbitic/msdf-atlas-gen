@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2020",
     "lib": [
-      "es6"
+      "esnext"
     ],
     "module": "esnext",
     "moduleResolution": "node",
@@ -18,11 +18,10 @@
     "experimentalDecorators": true
   },
   "include": [
-    "./src"
+    "src"
   ],
   "exclude": [
-    "./node_modules",
-    "./dist",
-    "*.spec.ts"
+    "dist",
+    "node_modules"
   ]
 }
