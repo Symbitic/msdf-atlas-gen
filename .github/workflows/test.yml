@@ -27,18 +27,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Set artifact path
-        id: set-path
-        shell: bash
-        run: |
-          if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-            echo "ARTIFACT_PATH=./bin/linux/msdf-atlas-gen" >> $GITHUB_OUTPUT
-          elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-            echo "ARTIFACT_PATH=./bin/darwin/msdf-atlas-gen" >> $GITHUB_OUTPUT
-          elif [ "${{ matrix.os }}" == "windows-latest" ]; then
-            echo "ARTIFACT_PATH=./bin/win32/msdf-atlas-gen.exe" >> $GITHUB_OUTPUT
-          fi
-
       - name: Add msbuild to PATH
         if: contains(matrix.os, 'windows')
         uses: microsoft/setup-msbuild@v2
@@ -66,14 +54,14 @@ jobs:
       - name: Build
         run: cmake --build build --config Release --parallel 4 --target msdf-atlas-gen-standalone
 
-      - name: Rename
-        run: node rename.js
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: msdf-atlas-gen-${{ matrix.os }}
-          path: ${{ steps.set-path.outputs.ARTIFACT_PATH }}
+          name: bins
+          path: |
+            bin/win32/msdf-atlas-gen.exe
+            bin/darwin/msdf-atlas-gen
+            bin/linux/msdf-atlas-gen
           if-no-files-found: error
           retention-days: 1
 
@@ -91,7 +79,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          path: ./
+          name: bins
 
       - name: Verify
         run: find . -type f
