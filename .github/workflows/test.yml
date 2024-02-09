@@ -59,7 +59,7 @@ jobs:
         with:
           name: msdf-atlas-gen-${{ matrix.os }}
           path: |
-            build/bin/Release/win32/msdf-atlas-gen.exe
+            build/bin/Release/msdf-atlas-gen.exe
             build/bin/msdf-atlas-gen
           if-no-files-found: error
           retention-days: 1
