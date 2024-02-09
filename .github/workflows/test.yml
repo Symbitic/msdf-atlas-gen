@@ -3,24 +3,18 @@ name: Test
 on:
   push:
     branches:
-      - "**"
-      - "!v**"
+      - main
   pull_request:
 
 jobs:
   build:
     name: Build
-    permissions:
-      contents: write
-      packages: write
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os:
           - ubuntu-latest
-          - macos-latest
-          - windows-latest
     steps:
       - name: Clone Repository
         uses: actions/checkout@v4
@@ -54,34 +48,5 @@ jobs:
       - name: Build
         run: cmake --build build --config Release --parallel 4 --target msdf-atlas-gen-standalone
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: msdf-atlas-gen-${{ matrix.os }}
-          path: |
-            build/bin/Release/msdf-atlas-gen.exe
-            build/bin/msdf-atlas-gen
-          if-no-files-found: error
-          retention-days: 1
-
-  deploy:
-    name: Deploy
-    permissions:
-      contents: write
-      packages: write
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone Repository
-        uses: actions/checkout@v4
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ./
-
-      - name: Rename
-        run: node rename.js
-
-      - name: Verify
-        run: find . -type f
+      - name: Build (TS)
+        run: npm run build
