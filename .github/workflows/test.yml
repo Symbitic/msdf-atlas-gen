@@ -80,5 +80,8 @@ jobs:
         with:
           path: ./
 
+      - name: Rename
+        run: node rename.js
+
       - name: Verify
         run: find . -type f
